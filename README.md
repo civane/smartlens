@@ -171,8 +171,10 @@ smartlens_bundle/
 │       ├── health.py        ← POST /health/steps + /sleep
 │       └── notifications.py ← GET /notifications/stream (SSE)
 └── frontend/
+    ├── index.html               ← New landing page with three feature buttons (NEW)
+    ├── fake-news.html           ← Enhanced fake news detector with OCR & voice (NEW)
+    ├── health-checks.html       ← Health checks placeholder page (NEW)
     ├── SmartLens_HK_Final.html  ← HK-optimized UI with Llama 4 / GPT-4o / Qwen
-    ├── index.html               ← Original Gemini-based UI (legacy)
     ├── script.py                ← Model testing script for HK region
     ├── script_1.py              ← Full nutrition test on working models
     └── script_2.py              ← HTML generation script
@@ -202,6 +204,59 @@ The frontend automatically falls back to the next model if the primary is rate-l
 | `Redis connection error` | Wait 5 s after `docker compose up` for Redis to initialise |
 | Blank UI | Open http://localhost (not a local file path) |
 | Port 80 in use | Change `"80:80"` to `"8080:80"` in docker-compose.yml then visit http://localhost:8080 |
+
+---
+
+## 🆕 New Features (Added in This Fork)
+
+### 1. Enhanced Fake News Detector (`/fake-news.html`)
+
+A comprehensive misinformation analysis tool with the following capabilities:
+
+#### Input Methods
+- **📁 Image Upload**: Drag & drop or click to upload news screenshots, mobile screen captures, or poster images
+- **📷 Camera Capture**: Real-time photo capture using device camera
+- **📝 Text Input**: Direct text paste for analysis
+
+#### Analysis Features
+- **🔍 OCR Text Extraction**: Automatically extracts text from uploaded images
+- **📊 Credibility Scoring**: 0-100 credibility score with visual progress bar
+- **🏷️ Classification**: Categorizes content as Real / Suspect / Highly Fake / Unknown
+- **⚠️ Issue Detection**: Automatically identifies:
+  - Exaggerated claims and sensational language
+  - Emotional manipulation tactics
+  - False attributions and missing sources
+- **✅ Fact Checking**: Cross-references with authoritative sources (WHO, CDC, etc.)
+
+#### Visual Feedback
+- **💳 AR-Style Floating Card**: Displays credibility score, classification tag, and risk warning overlay on analyzed images
+- **🖍️ Image Highlighting**: Color-coded boxes on original image:
+  - 🔴 Red = Fake content
+  - 🟡 Yellow = Suspect content
+  - 🟢 Green = Verified content
+- **📝 Text Analysis**: Side-by-side comparison with highlighted text segments
+
+#### Voice Reporting
+- **🔊 Text-to-Speech**: Audio播报 of analysis results in English
+- One-click play/stop functionality
+
+### 2. Simplified Landing Page (`/index.html`)
+
+Clean, minimalist interface with three main entry points:
+- **📰 Fake News** → Enhanced fake news detector
+- **❤️ Health Checks** → Placeholder for future health monitoring features
+- **🍽️ Food Calories** → Original calorie analysis dashboard
+
+### 3. Updated Frontend Structure
+
+```
+frontend/
+├── index.html              ← New landing page with three buttons
+├── fake-news.html          ← Enhanced fake news detector (NEW)
+├── health-checks.html      ← Health checks placeholder (NEW)
+├── SmartLens_HK_Final.html ← Original full dashboard
+└── ...
+```
 
 ---
 
